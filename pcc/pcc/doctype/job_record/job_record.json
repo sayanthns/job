@@ -66,9 +66,19 @@
    "group": "Details",
    "link_doctype": "Sales Invoice",
    "link_fieldname": "custom_job_record"
+  },
+  {
+   "group": "Details",
+   "link_doctype": "Purchase Invoice",
+   "link_fieldname": "custom_job_record"
+  },
+  {
+   "group": "Details",
+   "link_doctype": "Journal Entry",
+   "link_fieldname": "custom_job_record"
   }
  ],
- "modified": "2025-01-17 13:26:47.491675",
+ "modified": "2025-01-17 13:54:31.343311",
  "modified_by": "Administrator",
  "module": "Pcc",
  "name": "Job Record",
