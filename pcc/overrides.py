@@ -6,5 +6,4 @@ from erpnext.accounts.doctype.payment_entry.payment_entry import PaymentEntry
 class CustomPE(PaymentEntry):
     
     def set_exchange_gain_loss(self):
-        # Simply return without performing any exchange gain/loss calculation
         return
