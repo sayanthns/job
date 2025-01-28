@@ -40,9 +40,9 @@ app_license = "mit"
 
 # Home Pages
 # ----------
-app_include = [
-    "patches.override_payment_entry"
-]
+# app_include = [
+#     "patches.override_payment_entry"
+# ]
 # application home page (will override Website Settings)
 # home_page = "login"
 
@@ -120,7 +120,9 @@ app_include = [
 # 	"ToDo": "custom_app.overrides.CustomToDo"
 # }
 override_doctype_class = {
-    "Payment Entry": "pcc.overrides.accounts.doctype.payment_entry.payment_entry.PaymentEntry"
+    "Payment Entry": "pcc.pcc.patches.override_payment_entry.CustomPE"
+
+    
 }
 
 # Document Events
