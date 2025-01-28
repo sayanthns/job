@@ -119,6 +119,9 @@ app_include = [
 # override_doctype_class = {
 # 	"ToDo": "custom_app.overrides.CustomToDo"
 # }
+override_doctype_class = {
+    "Payment Entry": "pcc.overrides.accounts.doctype.payment_entry.payment_entry.PaymentEntry"
+}
 
 # Document Events
 # ---------------
