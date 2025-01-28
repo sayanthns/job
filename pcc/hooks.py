@@ -119,9 +119,9 @@ app_license = "mit"
 # override_doctype_class = {
 # 	"ToDo": "custom_app.overrides.CustomToDo"
 # }
-override_doctype_class = {
-    "Payment Entry": "pcc.overrides.CustomPE"    
-}
+# override_doctype_class = {
+#     "Payment Entry": "pcc.overrides.CustomPE"    
+# }
 
 # Document Events
 # ---------------
