@@ -1,5 +1,5 @@
-// Copyright (c) 2016, Frappe Technologies Pvt. Ltd. and contributors
-// For license information, please see license.txt
+# // Copyright (c) 2016, Frappe Technologies Pvt. Ltd. and contributors
+# // For license information, please see license.txt
 frappe.provide("erpnext.accounts.dimensions");
 
 cur_frm.cscript.tax_table = "Advance Taxes and Charges";
@@ -545,7 +545,7 @@ frappe.ui.form.on('Payment Entry', {
 		let company_currency = frappe.get_doc(":Company", frm.doc.company).default_currency;
 		if (frm.doc.paid_amount) {
 			frm.set_value("base_paid_amount", flt(frm.doc.paid_amount) * flt(frm.doc.source_exchange_rate));
-			// target exchange rate should always be same as source if both account currencies is same
+			# // target exchange rate should always be same as source if both account currencies is same
 			if(frm.doc.paid_from_account_currency == frm.doc.paid_to_account_currency) {
 				frm.set_value("target_exchange_rate", frm.doc.source_exchange_rate);
 				frm.set_value("base_received_amount", frm.doc.base_paid_amount);
@@ -554,12 +554,12 @@ frappe.ui.form.on('Payment Entry', {
 				frm.set_value("base_received_amount", frm.doc.base_paid_amount);
 			}
 
-			// set_unallocated_amount is called by below method,
-			// no need trigger separately
+			# // set_unallocated_amount is called by below method,
+			# // no need trigger separately
 			frm.events.set_total_allocated_amount(frm);
 		}
 
-		// Make read only if Accounts Settings doesn't allow stale rates
+		# // Make read only if Accounts Settings doesn't allow stale rates
 		frm.set_df_property("source_exchange_rate", "read_only", erpnext.stale_rate_allowed() ? 0 : 1);
 	},
 
@@ -580,13 +580,13 @@ frappe.ui.form.on('Payment Entry', {
 				frm.set_value("base_paid_amount", frm.doc.base_received_amount);
 			}
 
-			// set_unallocated_amount is called by below method,
-			// no need trigger separately
+			# // set_unallocated_amount is called by below method,
+			# // no need trigger separately
 			frm.events.set_total_allocated_amount(frm);
 		}
 		frm.set_paid_amount_based_on_received_amount = false;
 
-		// Make read only if Accounts Settings doesn't allow stale rates
+		# // Make read only if Accounts Settings doesn't allow stale rates
 		frm.set_df_property("target_exchange_rate", "read_only", erpnext.stale_rate_allowed() ? 0 : 1);
 	},
 
@@ -881,7 +881,7 @@ frappe.ui.form.on('Payment Entry', {
 
 		$.each(frm.doc.references || [], function(i, row) {
 			if (frappe.flags.allocate_payment_amount == 0) {
-				//If allocate payment amount checkbox is unchecked, set zero to allocate amount
+				# //If allocate payment amount checkbox is unchecked, set zero to allocate amount
 				row.allocated_amount = 0;
 
 			} else if (frappe.flags.allocate_payment_amount != 0 && (!row.allocated_amount || paid_amount_change)) {
@@ -1132,7 +1132,7 @@ frappe.ui.form.on('Payment Entry', {
 			},
 			callback: function(r) {
 				if(!r.exc && r.message) {
-					// set taxes table
+					# // set taxes table
 					if(r.message) {
 						for (let tax of r.message) {
 							if (tax.charge_type === 'On Net Total') {
@@ -1176,7 +1176,7 @@ frappe.ui.form.on('Payment Entry', {
 		let msg = "";
 
 		if (d.account_head && !d.description) {
-			// set description from account head
+			# // set description from account head
 			d.description = d.account_head.split(' - ').slice(0, -1).join(' - ');
 		}
 
@@ -1221,18 +1221,18 @@ frappe.ui.form.on('Payment Entry', {
 
 		if(cint(tax.included_in_paid_amount)) {
 			if(tax.charge_type == "Actual") {
-				// inclusive tax cannot be of type Actual
+				# // inclusive tax cannot be of type Actual
 				actual_type_error();
 			} else if(tax.charge_type == "On Previous Row Amount" &&
 				!cint(this.frm.doc["taxes"][tax.row_id - 1].included_in_paid_amount)
 			) {
-				// referred row should also be an inclusive tax
+				# // referred row should also be an inclusive tax
 				on_previous_row_error(tax.row_id);
 			} else if(tax.charge_type == "On Previous Row Total") {
 				let taxes_not_included = $.map(this.frm.doc["taxes"].slice(0, tax.row_id),
 					function(t) { return cint(t.included_in_paid_amount) ? null : t; });
 				if(taxes_not_included.length > 0) {
-					// all rows above this tax should be inclusive
+					# // all rows above this tax should be inclusive
 					on_previous_row_error(tax.row_id == 1 ? "1" : "1 - " + tax.row_id);
 				}
 			}
@@ -1294,7 +1294,7 @@ frappe.ui.form.on('Payment Entry', {
 		let company_currency = frappe.get_doc(":Company", frm.doc.company).default_currency;
 		let actual_tax_dict = {};
 
-		// maintain actual tax rate based on idx
+		# // maintain actual tax rate based on idx
 		$.each(frm.doc["taxes"] || [], function(i, tax) {
 			if (tax.charge_type == "Actual") {
 				actual_tax_dict[tax.idx] = flt(tax.tax_amount, precision("tax_amount", tax));
@@ -1304,7 +1304,7 @@ frappe.ui.form.on('Payment Entry', {
 		$.each(frm.doc["taxes"] || [], function(i, tax) {
 			let current_tax_amount = frm.events.get_current_tax_amount(frm, tax);
 
-			// Adjust divisional loss to the last item
+			# // Adjust divisional loss to the last item
 			if (tax.charge_type == "Actual") {
 				actual_tax_dict[tax.idx] -= current_tax_amount;
 				if (i == frm.doc["taxes"].length - 1) {
@@ -1312,7 +1312,7 @@ frappe.ui.form.on('Payment Entry', {
 				}
 			}
 
-			// tax accounts are only in company currency
+			# // tax accounts are only in company currency
 			tax.base_tax_amount = current_tax_amount;
 			current_tax_amount *= (tax.add_deduct_tax == "Deduct") ? -1.0 : 1.0;
 
@@ -1322,14 +1322,14 @@ frappe.ui.form.on('Payment Entry', {
 				tax.total = flt(frm.doc["taxes"][i-1].total + current_tax_amount, precision("total", tax));
 			}
 
-			// tac accounts are only in company currency
+			# // tac accounts are only in company currency
 			tax.base_total = tax.total
 
-			// calculate total taxes and base total taxes
+			# // calculate total taxes and base total taxes
 			if(frm.doc.payment_type == "Pay") {
-				// tax accounts only have company currency
+				# // tax accounts only have company currency
 				if(tax.currency != frm.doc.paid_to_account_currency) {
-					//total_taxes_and_charges has the target currency. so using target conversion rate
+					# //total_taxes_and_charges has the target currency. so using target conversion rate
 					frm.doc.total_taxes_and_charges += flt(current_tax_amount / frm.doc.target_exchange_rate);
 
 				} else {
@@ -1337,7 +1337,7 @@ frappe.ui.form.on('Payment Entry', {
 				}
 			} else if(frm.doc.payment_type == "Receive") {
 				if(tax.currency != frm.doc.paid_from_account_currency) {
-					//total_taxes_and_charges has the target currency. so using source conversion rate
+					# //total_taxes_and_charges has the target currency. so using source conversion rate
 					frm.doc.total_taxes_and_charges += flt(current_tax_amount / frm.doc.source_exchange_rate);
 				} else {
 					frm.doc.total_taxes_and_charges += current_tax_amount;
@@ -1356,7 +1356,7 @@ frappe.ui.form.on('Payment Entry', {
 		let tax_rate = tax.rate;
 		let current_tax_amount = 0.0;
 
-		// To set row_id by default as previous row.
+		# // To set row_id by default as previous row.
 		if(["On Previous Row Amount", "On Previous Row Total"].includes(tax.charge_type)) {
 			if (tax.idx === 1) {
 				frappe.throw(
