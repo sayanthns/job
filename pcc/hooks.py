@@ -40,7 +40,9 @@ app_license = "mit"
 
 # Home Pages
 # ----------
-
+app_include = [
+    "patches.override_payment_entry"
+]
 # application home page (will override Website Settings)
 # home_page = "login"
 
@@ -162,9 +164,9 @@ app_license = "mit"
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "pcc.event.get_events"
 # }
-override_whitelisted_methods = {
-    "erpnext.accounts.doctype.payment_entry.payment_entry": "pcc.overrides.erpnext.accounts.doctype.payment_entry.payment_entry"
-}
+# override_whitelisted_methods = {
+#     "erpnext.accounts.doctype.payment_entry.payment_entry": "pcc.overrides.erpnext.accounts.doctype.payment_entry.payment_entry"
+# }
 
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
