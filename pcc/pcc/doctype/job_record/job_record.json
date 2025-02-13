@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:JR-{####}",
+ "autoname": "prompt",
  "creation": "2025-01-17 12:42:26.021128",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -78,11 +78,11 @@
    "link_fieldname": "custom_job_record"
   }
  ],
- "modified": "2025-01-17 13:54:31.343311",
+ "modified": "2025-02-13 07:38:08.700971",
  "modified_by": "Administrator",
  "module": "Pcc",
  "name": "Job Record",
- "naming_rule": "Expression",
+ "naming_rule": "Set by user",
  "owner": "Administrator",
  "permissions": [
   {
