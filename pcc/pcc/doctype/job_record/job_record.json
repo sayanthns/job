@@ -34,6 +34,14 @@
    "options": "\nTRANSPORTATION\nCUSTOMS CLEARANCE\nWAREHOUSE"
   },
   {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "label": "Job Type",
+   "options": "\nTTRUH\nCCRUH"
+  },
+  {
    "fieldname": "column_break_gvrt",
    "fieldtype": "Column Break"
   },
